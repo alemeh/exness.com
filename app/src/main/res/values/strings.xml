@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Exness</string>
+
+    <string name="menu_help">Помощь</string>
+    <string name="menu_list">Валюты</string>
+    <string name="menu_refresh">Обновить</string>
+</resources>
