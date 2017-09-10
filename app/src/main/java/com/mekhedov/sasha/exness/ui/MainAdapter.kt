@@ -39,8 +39,8 @@ class MainAdapter(private val context : Context, private val list : List<MainMod
     override fun onBindViewHolder(holder : MainAdapter.ViewHolder, position : Int){
         var mainModel : MainModel = list.get(position)
         holder.tvTitle.text = mainModel.name;
-        holder.tvValue.text = "ask/bid:\n<b>${mainModel.ask}/${mainModel.bid}</b>"
-        holder.tvSpread.text = "spread:\n<b>${mainModel.spread}</b>"
+        holder.tvValue.text = "ask/bid: ${mainModel.ask}/${mainModel.bid}"
+        holder.tvSpread.text = "spread: ${mainModel.spread}"
     }
     override fun getItemCount() : Int{
         return list.size;

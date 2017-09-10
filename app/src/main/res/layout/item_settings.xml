@@ -24,33 +24,37 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvTitle"
-                android:layout_marginBottom="@dimen/margin"
-                android:textColor="@color/gray"
+                android:layout_centerVertical="true"
                 android:text="EURUSD"
-                android:textSize="24dp"
+                android:textSize="16dp"
                 />
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <ImageView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tvTitle"
-                android:orientation="horizontal"
-                android:weightSum="3">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvValue"
-                    android:text="ask/bid: "
-                    android:layout_weight="1"
-                    android:textSize="16dp"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/tvSpread"
-                    android:text="spread: "
-                    android:layout_weight="2"
-                    android:textSize="16dp"/>
-            </LinearLayout>
+                android:id="@+id/ivUp"
+                android:layout_toLeftOf="@+id/ivDown"
+                android:paddingLeft="@dimen/margin"
+                android:paddingRight="@dimen/margin"
+                android:src="@drawable/ic_keyboard_arrow_up_white_24px"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ivDown"
+                android:layout_toLeftOf="@+id/chBox"
+                android:paddingLeft="@dimen/margin"
+                android:paddingRight="@dimen/margin"
+                android:src="@drawable/ic_keyboard_arrow_down_white_24px"
+                />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:id="@+id/chBox"/>
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>

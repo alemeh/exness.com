@@ -11,6 +11,8 @@ import com.mekhedov.sasha.exness.BaseApplication
 import com.mekhedov.sasha.exness.common.Data
 import com.mekhedov.sasha.exness.common.RxBus
 import com.vicpin.krealmextensions.deleteAll
+import com.vicpin.krealmextensions.query
+import com.vicpin.krealmextensions.queryFirst
 import com.vicpin.krealmextensions.save
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -51,7 +53,6 @@ class MainPresenter : MvpPresenter<MainView>() {
 
             override fun onMessage(webSocket: WebSocket?, text: String?) {
                 Log.d(Data().TAG_JSON, text)
-                MainModel().deleteAll()
                 try{
                     val jsonObject = JSONObject(text);
                     var count : String = jsonObject.optString("subscribed_count")
@@ -69,7 +70,15 @@ class MainPresenter : MvpPresenter<MainView>() {
                         Log.d(Data().TAG_JSON, "spread: "+spread)
 
                         //MainModel(name, ask, bid, spread).save()
-                        Observable.just(MainModel(name, ask, bid, spread)).
+                        var mainModel = MainModel().queryFirst{ query -> query.equalTo("name",name) }
+                        if (mainModel == null)  {
+                            mainModel = MainModel(name, ask, bid, spread)
+                        }   else    {
+                            mainModel.ask = ask
+                            mainModel.bid = bid
+                            mainModel.spread = spread
+                        }
+                        Observable.just(mainModel).
                                 subscribeOn(AndroidSchedulers.mainThread()).
                                 observeOn(Schedulers.io()).
                                 subscribe({
@@ -119,5 +128,13 @@ class MainPresenter : MvpPresenter<MainView>() {
 
     fun send(str : String)  {
         webSocket.send(str)
+    }
+
+    fun disconnect()    {
+        try {
+            webSocket.close(1000, "GoodBye!")
+        } catch(e:Exception)    {
+            e.printStackTrace()
+        }
     }
 }
